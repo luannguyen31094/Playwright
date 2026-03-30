@@ -28,7 +28,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: tlshop/n8n-bridge-backend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/n8n-bridge-backend:latest
 
   build-frontend:
     runs-on: ubuntu-latest
@@ -51,4 +51,4 @@ jobs:
           context: ./AdminDashboard
           file: ./AdminDashboard/Dockerfile
           push: true
-          tags: tlshop/n8n-bridge-ui:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/n8n-bridge-ui:latest
