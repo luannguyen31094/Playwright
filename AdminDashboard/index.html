@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="en" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" dir="ltr"
+  data-pc-theme="light">
+<!-- [Head] start -->
+
+<head>
+  <title>TLShop | Quản Trị Trung Tâm</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description"
+    content="Datta Able is trending dashboard template made using Bootstrap 5 design framework. Datta Able is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies." />
+  <meta name="keywords"
+    content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
+  <meta name="author" content="CodedThemes" />
+
+  <!-- [Favicon] icon -->
+  <link rel="icon" href="img/favicon.png" type="image/png" />
+
+  <!-- [Font] Family -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- [phosphor Icons] https://phosphoricons.com/ -->
+  <link rel="stylesheet" href="fonts/phosphor/duotone/style.css" />
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link rel="stylesheet" href="fonts/tabler-icons.min.css" />
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link rel="stylesheet" href="fonts/feather.css" />
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link rel="stylesheet" href="fonts/fontawesome.css" />
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link rel="stylesheet" href="fonts/material.css" />
+  <!-- [Template CSS Files] -->
+  <link rel="stylesheet" href="css/style.css" id="main-style-link" />
+  <link rel="stylesheet" href="css/style_custom.css?v=3" />
+  <style>
+    /* === TLShop Custom Login Interface === */
+    #login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99999;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease;
+    }
+
+    #login-overlay.hidden {
+      display: none !important;
+    }
+
+    .ap-login-card {
+      width: 420px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      color: #f8fafc;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    }
+
+    .ap-logo-text {
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #60a5fa, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .ap-subtitle {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 30px;
+      font-weight: normal;
+    }
+
+    .ap-form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .ap-form-group label {
+      display: block;
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .ap-form-control {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    .ap-form-control:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .ap-btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      margin-top: 10px;
+    }
+
+    .ap-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+    }
+
+    .ap-error.hidden {
+      display: none !important;
+    }
+
+    .ap-error {
+      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    /* Sidebar Logo */
+    .sidebar-brand-text {
+      font-size: 24px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #60a5fa, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+      line-height: 1;
+    }
+  </style>
+  <style>
+    /* Forcing sticky column widths and colors internally to bypass cache and datatables overrides */
+    #productsTable th.sticky-col-right,
+    #productsTable td.sticky-col-right,
+    #modelsTable th.sticky-col-right,
+    #modelsTable td.sticky-col-right {
+      position: sticky !important;
+      right: 0 !important;
+      width: 90px !important;
+      min-width: 90px !important;
+      max-width: 90px !important;
+      z-index: 10 !important;
+      box-shadow: -4px 0 8px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html[data-pc-theme="light"] th.sticky-col-right,
+    html[data-pc-theme="light"] td.sticky-col-right {
+      background-color: #ffffff !important;
+      color: #475569 !important;
+    }
+
+    html[data-pc-theme="dark"] th.sticky-col-right,
+    html[data-pc-theme="dark"] td.sticky-col-right {
+      background-color: #1e293b !important;
+    }
+  </style>
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+
+<body>
+  <!-- LOGIN OVERLAY -->
+  <div id="login-overlay">
+    <div class="ap-login-card">
+      <h2 class="ap-logo-text">TLShop</h2>
+      <h4 class="ap-subtitle">Hệ Thống Quản Trị Trung Tâm</h4>
+
+      <div class="ap-form-group">
+        <label>Username</label>
+        <input type="text" class="ap-form-control" id="urlInput" placeholder="Nhập Username...">
+      </div>
+
+      <div class="ap-form-group">
+        <label>Password</label>
+        <input type="password" class="ap-form-control" id="apiKeyInput" placeholder="Nhập Password...">
+      </div>
+
+      <div id="loginError" class="ap-error hidden">Lỗi đăng nhập</div>
+
+      <button id="btnConnect" class="ap-btn-primary" onclick="connectN8N()">🚀 KẾT NỐI HỆ THỐNG</button>
+    </div>
+  </div>
+
+  <!-- [ Pre-loader ] start -->
+  <div class="loader-bg fixed inset-0 bg-white dark:bg-themedark-cardbg z-[1034]">
+    <div class="loader-track h-[5px] w-full inline-block absolute overflow-hidden top-0">
+      <div
+        class="loader-fill w-[300px] h-[5px] bg-primary-500 absolute top-0 left-0 animate-[hitZak_0.6s_ease-in-out_infinite_alternate]">
+      </div>
+    </div>
+  </div>
+  <!-- [ Pre-loader ] End -->
+  <!-- [ Sidebar Menu ] start -->
+  <nav class="pc-sidebar">
+    <div class="navbar-wrapper h-full relative overflow-hidden">
+      <div class="m-header flex items-center py-4 px-6 h-header-height">
+        <a href="#" class="b-brand flex items-center gap-3">
+          <h2 class="sidebar-brand-text">TLShop</h2>
+        </a>
+      </div>
+      <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
+        <ul class="pc-navbar">
+          <!-- GROUP 1: VẬN HÀNH & NỘI DUNG -->
+          <li class="pc-item pc-caption">
+            <label>Quản Trị Vận Hành 🌸</label>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-products')">
+              <span class="pc-micon"><i data-feather="shopping-bag"></i></span>
+              <span class="pc-mtext">Kho Hàng Tiềm Năng</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-campaigns')">
+              <span class="pc-micon"><i data-feather="monitor"></i></span>
+              <span class="pc-mtext">Luồng Video (Showcase)</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-scripts')">
+              <span class="pc-micon"><i data-feather="film"></i></span>
+              <span class="pc-mtext">Biên Tập Kịch Bản</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-models')">
+              <span class="pc-micon"><i data-feather="users"></i></span>
+              <span class="pc-mtext">Kho Người Mẫu (Models)</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-music')">
+              <span class="pc-micon"><i data-feather="music"></i></span>
+              <span class="pc-mtext">Thư Viện Âm Nhạc</span>
+            </a>
+          </li>
+
+          <!-- GROUP 2: KỸ THUẬT & HỆ THỐNG -->
+          <li class="pc-item pc-caption mt-4">
+            <label>Quản Trị Kỹ Thuật ⚙️</label>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-radar')">
+              <span class="pc-micon"><i data-feather="activity"></i></span>
+              <span class="pc-mtext">Radar Hệ Thống (Worker)</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-policies')">
+              <span class="pc-micon"><i data-feather="shield"></i></span>
+              <span class="pc-mtext">AI Policy & Luật</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-scoring')">
+              <span class="pc-micon"><i data-feather="crosshair"></i></span>
+              <span class="pc-mtext">Hệ Số Chấm Điểm AI</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="#" class="pc-link" onclick="switchTab('tab-configs')">
+              <span class="pc-micon"><i data-feather="settings"></i></span>
+              <span class="pc-mtext">Cấu Hình Lõi (Core API)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="absolute bottom-0 left-0 w-full py-4 bg-white/90 dark:bg-[#1a202c]/90 border-t border-gray-200 dark:border-gray-800 backdrop-blur-sm z-50 text-center text-[11px] text-gray-500 dark:text-gray-400 font-medium transition-colors">
+        Copyright &copy; 2026 Luan Nguyen 🌸<br />All Rights Reserved
+      </div>
+
+    </div>
+  </nav>
+  <!-- [ Sidebar Menu ] end -->
+  <!-- [ Header Topbar ] start -->
+  <header class="pc-header">
+    <div class="header-wrapper flex max-sm:px-[15px] px-[25px] grow"><!-- [Mobile Media Block] start -->
+      <div class="me-auto pc-mob-drp">
+        <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
+          <!-- ======= Menu collapse Icon ===== -->
+          <li class="pc-h-item pc-sidebar-collapse max-lg:hidden lg:inline-flex">
+            <a href="#" class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="sidebar-hide">
+              <i data-feather="menu"></i>
+            </a>
+          </li>
+          <li class="pc-h-item pc-sidebar-popup lg:hidden">
+            <a href="#" class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="mobile-collapse">
+              <i data-feather="menu"></i>
+            </a>
+          </li>
+          <li class="dropdown pc-h-item">
+            <a class="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
+              aria-haspopup="false" aria-expanded="false">
+              <i data-feather="search"></i>
+            </a>
+            <div class="dropdown-menu pc-h-dropdown drp-search">
+              <form class="px-2 py-1">
+                <input type="search" class="form-control !border-0 !shadow-none" placeholder="Search here. . ." />
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- [Mobile Media Block end] -->
+      <div class="ms-auto">
+        <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
+          <li class="dropdown pc-h-item">
+            <a class="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
+              aria-haspopup="false" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-sun">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
+              <a href="#!" class="dropdown-item" onclick="localStorage.setItem('theme', 'dark'); layout_change('dark')">
+                <i data-feather="moon"></i>
+                <span>Tối (Dark)</span>
+              </a>
+              <a href="#!" class="dropdown-item"
+                onclick="localStorage.setItem('theme', 'light'); layout_change('light')">
+                <i data-feather="sun"></i>
+                <span>Sáng (Light)</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="dropdown pc-h-item header-user-profile">
+            <a class="pc-head-link dropdown-toggle arrow-none me-0" data-pc-toggle="dropdown" href="#" role="button"
+              aria-haspopup="false" data-pc-auto-close="outside" aria-expanded="false">
+              <img src="img/user/avatar-2.jpg" alt="user"
+                class="w-10 h-10 rounded-full border-2 border-primary-500 object-cover"
+                onerror="this.src='https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff'" />
+            </a>
+            <div
+              class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown p-2 overflow-hidden shadow-lg border border-gray-700">
+              <div class="dropdown-header flex items-center justify-between py-4 px-5 bg-primary-500 rounded-t-md">
+                <div class="flex mb-1 items-center">
+                  <div class="shrink-0 flex items-center">
+                    <img src="img/user/avatar-2.jpg" alt="user-image" class="w-10 rounded-full" onerror="this.src=''" />
+                  </div>
+                  <div class="grow ms-3">
+                    <h6 class="mb-1 text-white font-bold">Workspace Admin</h6>
+                    <span class="text-white text-xs opacity-80">Local Server</span>
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown-body py-3 px-3">
+                <div class="grid my-1">
+                  <button
+                    class="btn btn-danger flex items-center justify-center text-white w-full gap-2 rounded-md hover:bg-danger-600 transition"
+                    onclick="localStorage.removeItem('sh_ngrokUrl'); localStorage.removeItem('sh_apiKey'); window.location.reload();">
+                    <i data-feather="log-out" class="w-[20px] h-[20px]"></i>
+                    <span class="font-bold">Đăng Xuất</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- [ Header ] end -->
+
+
+
+  <!-- [ Main Content ] start -->
+  <div class="pc-container">
+    <div class="pc-content h-full p-3">
+
+      <!-- TAB: PRODUCTS -->
+      <!-- TAB: PRODUCTS -->
+      <div id="tab-products" class="tab-panel hidden h-full">
+        <div
+          class="card table-card h-[calc(100vh-100px)] flex flex-col relative w-full overflow-hidden border-0 shadow-lg rounded-xl">
+
+          <!-- BỘ LỌC TÌM KIẾM (FILTER) -->
+          <div
+            class="px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700 flex flex-wrap gap-3 items-end rounded-t-xl">
+            <div class="flex flex-col gap-1 w-[150px]">
+              <label class="text-xs font-bold text-gray-500 uppercase">Danh Mục (ID/Tên)</label>
+              <input type="text" id="filter_categoryid" class="form-control form-control-sm !text-sm"
+                placeholder="Nhập để lọc...">
+            </div>
+            <div class="flex flex-col gap-1 w-[130px]">
+              <label class="text-xs font-bold text-gray-500 uppercase">Hạng Sản Phẩm</label>
+              <select id="filter_final_rank" class="form-select form-select-sm !text-sm">
+                <option value="">-- Tất cả --</option>
+                <option value="S - SUPER">Hạng S</option>
+                <option value="A - HIGH">Hạng A</option>
+                <option value="B - MEDIUM">Hạng B</option>
+                <option value="C - LOW">Hạng C</option>
+                <option value="F - TRASH">Hạng Rác</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1 w-[140px]">
+              <label class="text-xs font-bold text-gray-500 uppercase">Từ ngày</label>
+              <input type="date" id="filter_fromdate" class="form-control form-control-sm !text-sm">
+            </div>
+            <div class="flex flex-col gap-1 w-[140px]">
+              <label class="text-xs font-bold text-gray-500 uppercase">Đến ngày</label>
+              <input type="date" id="filter_todate" class="form-control form-control-sm !text-sm">
+            </div>
+            <div class="flex flex-col gap-1 w-[140px]">
+              <label class="text-xs font-bold text-gray-500 uppercase">Video Status</label>
+              <select id="filter_statusvideo" class="form-select form-select-sm !text-sm">
+                <option value="">-- Tất cả --</option>
+                <option value="PENDING">Chưa xử lý (Pending)</option>
+                <option value="PROCESSED">Đã có Video</option>
+              </select>
+            </div>
+            <div class="flex gap-1 ms-auto flex-row items-end">
+              <button
+                class="btn btn-sm btn-primary bg-primary-500 hover:bg-primary-600 border-0 flex items-center gap-1 shadow-sm px-4 h-[31px]"
+                onclick="fetchProducts()">
+                <i data-feather="filter" class="w-4 h-4"></i> Lọc
+              </button>
+              <button
+                class="btn btn-sm btn-primary bg-primary-500 hover:bg-primary-600 border-0 flex items-center gap-1 shadow-sm px-4 h-[31px]"
+                id="btnSyncProducts">
+                <i data-feather="refresh-cw" class="w-4 h-4"></i> Tải Lại
+              </button>
+            </div>
+          </div>
+          <div class="card-body p-3 h-full overflow-auto">
+            <table id="productsTable" class="table table-hover w-full align-middle text-sm border-separate"
+              style="border-spacing: 0 4px;">
+              <thead
+                class="bg-gray-100 dark:bg-gray-800 text-gray-500 font-bold uppercase text-[11px] tracking-wider shadow-sm">
+                <tr>
+                  <th class="rounded-l-lg p-3 text-left w-[70px] min-w-[70px]">Ảnh</th>
+                  <th class="p-3 text-left min-w-[200px]">Sản Phẩm</th>
+                  <th class="p-3 text-left w-[120px] min-w-[120px]">Danh Mục</th>
+                  <th class="p-3 text-left min-w-[130px]">Giá & Hoa Hồng</th>
+                  <th class="p-3 text-left min-w-[130px]">Chỉ Số Bán Hàng</th>
+                  <th class="p-3 text-left w-[120px] min-w-[120px]">Đánh Giá AI</th>
+                  <th class="p-3 text-left w-[100px] min-w-[100px]">Ngày Cào</th>
+                  <th class="p-3 text-left w-[120px] min-w-[120px]">Trạng Thái</th>
+                  <th class="rounded-r-lg p-3 text-center sticky-col-right"
+                    style="width: 90px; min-width: 90px; max-width: 90px;">Hành Động</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600 dark:text-gray-300">
+                <!-- Populate by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <!-- TAB: CAMPAIGNS -->
+        <div id="tab-campaigns" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Luồng Xử Lý Sản Xuất Video</h5>
+            </div>
+            <div class="card-body p-4 h-full"><i>Đang xây dựng...</i></div>
+          </div>
+        </div>
+
+        <!-- TAB: RADAR -->
+        <div id="tab-radar" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Giám Sát Playwright / N8N</h5>
+            </div>
+            <div class="card-body p-4 h-full"><i>Đang xây dựng...</i></div>
+          </div>
+        </div>
+
+        <!-- TAB: POLICIES -->
+        <div id="tab-policies" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Luật AI Học Việc</h5>
+            </div>
+            <div class="card-body p-4 h-full"><i>(Đang gom từ giao diện cũ)</i></div>
+          </div>
+        </div>
+
+        <!-- TAB: MODELS -->
+        <div id="tab-models" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header flex justify-between items-center py-3">
+              <h5 class="mb-0">Kho Người Mẫu AI</h5>
+              <button class="btn btn-sm btn-success" id="btnNewModel" onclick="openModelModal()">+ Thêm Người Mẫu
+                Mới</button>
+            </div>
+            <div class="card-body p-0 h-full overflow-auto">
+              <table id="modelsTable" class="table table-hover w-full m-0">
+                <thead>
+                  <tr>
+                    <th>Tên Mẫu</th>
+                    <th>Giới tính</th>
+                    <th>Tuổi</th>
+                    <th>Style</th>
+                    <th>Status</th>
+                    <th class="sticky-col-right text-center" style="width: 90px; min-width: 90px; max-width: 90px;">Hành
+                      Động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rendered by DataTables JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-scripts" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header flex justify-between items-center py-3">
+              <h5 class="mb-0">Quản lý Kịch bản</h5>
+              <button class="btn btn-sm btn-success" onclick="createNewScript()">+ Kịch bản mới</button>
+            </div>
+            <div class="card-body p-4 grid grid-cols-12 gap-6 h-full overflow-hidden">
+              <div class="col-span-12 xl:col-span-4 border-r dark:border-themedark-border pr-4 h-full overflow-auto">
+                <ul id="scriptList" class="list-none p-0 m-0">
+                  <li class="text-muted text-center pt-4">Đang tải...</li>
+                </ul>
+              </div>
+              <div class="col-span-12 xl:col-span-8 h-full overflow-auto pr-2">
+                <h5 id="s_title" class="mb-3 flex justify-between items-center">Chi tiết kịch bản <button
+                    id="btnNewScript" class="btn btn-sm btn-outline-primary hidden">+ Bản Mới</button></h5>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                  <div>
+                    <label class="form-label text-sm text-muted">Tên Kịch Bản</label>
+                    <input type="text" id="s_name" class="form-control" placeholder="Tên kịch bản">
+                  </div>
+                  <div>
+                    <label class="form-label text-sm text-muted">Danh mục</label>
+                    <input type="text" id="s_cate" class="form-control" placeholder="Category">
+                  </div>
+                  <div>
+                    <label class="form-label text-sm text-muted">Giới tính</label>
+                    <select id="s_gender" class="form-select text-white border-secondary bg-transparent">
+                      <option value="male">Nam</option>
+                      <option value="female">Nữ</option>
+                      <option value="intersex">Phi Giới Tính</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="form-label text-sm text-muted">Mã Loại SP (Type ID)</label>
+                    <input type="number" id="s_type" class="form-control" placeholder="Product Type ID">
+                  </div>
+                  <div>
+                    <label class="form-label text-sm text-muted">Style Slug</label>
+                    <input type="text" id="s_style" class="form-control" placeholder="Style Slug">
+                  </div>
+                  <div class="flex items-center gap-4 mt-6">
+                    <div class="form-check form-switch cursor-pointer">
+                      <input class="form-check-input cursor-pointer" type="checkbox" id="s_active" checked>
+                      <label class="form-check-label cursor-pointer" for="s_active">Kích hoạt (Khả dụng)</label>
+                    </div>
+                    <div class="form-check form-switch cursor-pointer">
+                      <input class="form-check-input cursor-pointer" type="checkbox" id="s_default">
+                      <label class="form-check-label cursor-pointer" for="s_default">Bản Mặc Định</label>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4 border-white/10">
+                <div class="flex justify-between items-center mb-3">
+                  <h6 class="m-0 text-primary-400">📝 Storyboard (Cảnh quay)</h6>
+                  <button id="btnAddShot" class="btn btn-sm btn-success">+ Thêm Cảnh</button>
+                </div>
+                <div id="shotsGrid" class="grid grid-cols-1 gap-3 mb-6"></div>
+
+                <button id="btnSaveScript" class="btn btn-primary w-full py-3">BẤM LƯU KỊCH BẢN VÀO HỆ THỐNG
+                  GỐC</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-scoring" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header flex justify-between items-center py-3">
+              <h5 class="mb-0">Chấm Điểm Đánh Giá</h5>
+              <button class="btn btn-sm btn-success" id="btnNewScoring">+ Thêm Tiêu Chí</button>
+            </div>
+            <div class="card-body p-4 grid grid-cols-12 gap-6 h-full overflow-hidden">
+              <div class="col-span-12 xl:col-span-4 border-r dark:border-themedark-border pr-4 h-full overflow-auto">
+                <ul id="scoringList" class="list-none p-0 m-0">
+                  <li class="text-muted text-center pt-4">Đang tải...</li>
+                </ul>
+              </div>
+              <div class="col-span-12 xl:col-span-8 h-full overflow-auto">
+                <h5 class="mb-3">Chi tiết tiêu chí</h5>
+                <div class="mb-3">
+                  <input type="text" id="score_name" class="form-control"
+                    placeholder="Tên tiêu chí (Vd: Chất lượng hình ảnh)">
+                </div>
+                <div class="mb-3">
+                  <input type="number" id="score_weight" class="form-control" placeholder="Trọng số hệ số 1-10">
+                </div>
+                <button id="btnSaveScoring" class="btn btn-primary" onclick="saveScoring()">Lưu Hệ Số</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-music" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header flex justify-between items-center py-3">
+              <h5 class="mb-0">Kho Âm Nhạc</h5>
+              <button class="btn btn-sm btn-light" onclick="fetchMusicLibrary()">Làm Mới</button>
+            </div>
+            <div class="card-body p-4 overflow-auto h-full">
+              <div class="table-responsive">
+                <!-- Include DataTables custom styles for Tailwind properly -->
+                <table class="table table-hover w-full" id="musicDataTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tên File Nhạc</th>
+                      <th>Lượt Dùng</th>
+                      <th>Danh Mục</th>
+                      <th>Google Sheet Link</th>
+                      <th>ON/OFF</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-configs" class="tab-panel hidden h-full">
+          <div class="card table-card h-[calc(100vh-100px)]">
+            <div class="card-header flex justify-between items-center py-3">
+              <h5 class="mb-0">Cấu Hình Gốc</h5>
+              <button class="btn btn-sm btn-success" id="btnNewConfig">+ Thêm Biến</button>
+            </div>
+            <div class="card-body p-4 grid grid-cols-12 gap-6 h-full overflow-hidden">
+              <div class="col-span-12 xl:col-span-4 border-r dark:border-themedark-border pr-4 h-full overflow-auto">
+                <ul id="configList" class="list-none p-0 m-0">
+                  <li class="text-muted text-center pt-4">Đang tải...</li>
+                </ul>
+              </div>
+              <div class="col-span-12 xl:col-span-8 h-full overflow-auto">
+                <h5 class="mb-3">Sửa Cấu Hình Cốt Lõi</h5>
+                <input type="text" id="cfg_name" class="form-control mb-3" placeholder="Tên biến">
+                <input type="text" id="cfg_val" class="form-control mb-3" placeholder="Giá trị">
+                <textarea id="cfg_desc" class="form-control mb-3" rows="3" placeholder="Mô tả..."></textarea>
+                <button id="btnSaveConfig" class="btn btn-primary" onclick="saveConfig()">Lưu Cấu Hình</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+
+    <!-- Tailwind/Inline Hybrid Modal for Product Details -->
+    <div id="productDetailModal" class="fixed hidden items-center justify-center transition-opacity duration-300"
+      style="z-index: 99999; background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); position: fixed; inset: 0px; top: 0px; left: 0px; right: 0px; bottom: 0px; padding: 1rem;"
+      onclick="if(event.target === this) closeProductModal()">
+
+      <div class="rounded-2xl w-full flex flex-col overflow-hidden transform transition-all scale-100"
+        style="max-width: 960px; max-height: 85vh; background-color: #ffffff; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); border: 1px solid rgba(226, 232, 240, 0.8); display: flex; flex-direction: column;">
+
+        <!-- Modal Header -->
+        <div class="px-6 py-4 flex justify-between items-center border-b"
+          style="flex-shrink: 0; background-color: #ffffff; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; flex-direction: column;">
+            <h3 class="font-bold text-xl inline-flex items-center gap-2"
+              style="color: #1e293b; margin: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.125rem;">
+              <svg class="w-5 h-5" style="width: 20px; height: 20px; color: #4f46e5;" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              Hồ Sơ Mổ Xẻ Sản Phẩm
+            </h3>
+            <p class="text-xs mt-1 font-mono tracking-wide opacity-80"
+              style="color: #64748b; margin: 0; padding-left: 1.75rem; margin-top: 2px;">ID: <span id="pModal_id"
+                style="color: #94a3b8;">N/A</span></p>
+          </div>
+          <button onclick="closeProductModal()" class="rounded-full p-2 transition"
+            style="background-color: transparent; color: #94a3b8; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+            <svg class="w-5 h-5" style="width: 24px; height: 24px;" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal Body (Scrollable) -->
+        <div class="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-700"
+          style="flex: 1 1 auto; overflow-y: auto; background-color: #f8fafc; color: #334155; padding: 1.5rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem;">
+
+          <!-- Cột Trái -->
+          <div class="space-y-5" style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div class="flex flex-col sm:flex-row gap-5" style="display: flex; gap: 1.25rem; align-items: stretch;">
+              <!-- Ảnh thu nhỏ -->
+              <div
+                class="relative shrink-0 rounded-xl overflow-hidden shadow-sm border flex items-center justify-center group"
+                style="width: 140px; height: 140px; flex-shrink: 0; background-color: #ffffff; border-color: #e2e8f0; position: relative;">
+                <img id="pModal_img" src="img/placeholder.jpg"
+                  class="object-cover w-full h-full transition-transform duration-500" alt="Product Thumbnail"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="absolute top-2 right-2 text-white font-black px-2 py-0.5 rounded shadow border uppercase"
+                  style="background-color: #ef4444; border-color: #dc2626; position: absolute; top: 0.5rem; right: 0.5rem; font-size: 0.6rem; letter-spacing: 0.05em; border-radius: 0.25rem; z-index: 10;"
+                  id="pModal_discount">Sale 0%</div>
+              </div>
+
+              <!-- Box Thông tin -->
+              <div class="p-4 rounded-xl flex-1 shadow-sm flex items-center"
+                style="background-color: #ffffff; border: 1px solid #e2e8f0; flex: 1; display: flex; align-items: center;">
+                <h4 class="font-bold leading-relaxed"
+                  style="color: #1e293b; margin: 0; font-size: 0.95rem; line-height: 1.5; font-weight: 600;"
+                  id="pModal_title">Tên Sản Phẩm</h4>
+              </div>
+            </div>
+
+            <!-- Bảng Giá -->
+            <div class="grid grid-cols-2 gap-3"
+              style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem;">
+              <div class="p-3 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
+                <div class="uppercase font-bold" style="font-size: 0.65rem; color: #94a3b8; letter-spacing: 0.025em;">
+                  Giá Khách Mua</div>
+                <div class="font-black mt-1 truncate" style="font-size: 1.125rem; color: #e11d48; font-weight: 800;"
+                  id="pModal_price">0 VNĐ</div>
+              </div>
+              <div class="p-3 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
+                <div class="uppercase font-bold" style="font-size: 0.65rem; color: #94a3b8; letter-spacing: 0.025em;">Cò
+                  (Hoa Hồng)</div>
+                <div class="font-black mt-1 truncate" style="font-size: 1.125rem; color: #059669; font-weight: 800;"
+                  id="pModal_commission">0 VNĐ</div>
+              </div>
+              <div class="p-3 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
+                <div class="uppercase font-bold" style="font-size: 0.65rem; color: #94a3b8; letter-spacing: 0.025em;">Đã
+                  Chốt</div>
+                <div class="font-black mt-1 truncate" style="font-size: 1.125rem; color: #334155; font-weight: 800;"
+                  id="pModal_sold">0</div>
+              </div>
+              <div class="p-3 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
+                <div class="uppercase font-bold" style="font-size: 0.65rem; color: #94a3b8; letter-spacing: 0.025em;">
+                  Rating</div>
+                <div class="font-black mt-1 truncate" style="font-size: 1.125rem; color: #d97706; font-weight: 800;"
+                  id="pModal_rating">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cột Phải -->
+          <div class="flex flex-col h-full" style="display: flex; flex-direction: column; gap: 1.25rem; height: 100%;">
+            <div class="rounded-xl overflow-hidden shadow-sm border flex flex-col flex-1"
+              style="background-color: #ffffff; border-color: #e2e8f0; flex: 1; display: flex;">
+
+              <div class="px-4 py-3 border-b font-bold flex items-center gap-2 uppercase tracking-wider"
+                style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.7rem; display: flex; align-items: center; gap: 0.5rem; letter-spacing: 0.05em;">
+                <svg class="w-4 h-4" style="width: 16px; height: 16px; color: #8b5cf6;" fill="none"
+                  stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+                  </path>
+                </svg>
+                AI Phân Tích Thông Minh
+              </div>
+
+              <div class="p-4 flex flex-col flex-1"
+                style="display: flex; flex-direction: column; gap: 1.25rem; flex: 1;">
+                <div class="flex items-center justify-around rounded-lg p-3 border"
+                  style="background-color: #f8fafc; border-color: #f1f5f9; display: flex; align-items: center;">
+                  <div class="text-center" style="flex: 1; text-align: center;">
+                    <div class="font-bold uppercase tracking-widest"
+                      style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 0.25rem;">Điểm AI Máy Tính</div>
+                    <div class="font-black" style="font-size: 2.5rem; color: #f43f5e; line-height: 1; font-weight: 900;"
+                      id="pModal_ai_score">0</div>
+                  </div>
+                  <div style="width: 1px; height: 50px; background-color: #e2e8f0;"></div>
+                  <div class="text-center" style="flex: 1; text-align: center;">
+                    <div class="font-bold uppercase tracking-widest"
+                      style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 0.25rem;">Diểm Cơ Bản</div>
+                    <div class="font-black" style="font-size: 2.5rem; color: #3b82f6; line-height: 1; font-weight: 900;"
+                      id="pModal_total_score">0</div>
+                  </div>
+                </div>
+
+                <div id="pModal_score_breakdown" class="hidden rounded-lg p-3 border shadow-inner" style="background-color: #f0fdfa; border-color: #ccfbf1;">
+                  <div class="text-[9px] font-black text-teal-600 uppercase tracking-widest mb-2 text-center">Bảng phân rã điểm cơ bản</div>
+                  <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-[11px] text-gray-600 font-mono">
+                    <div class="flex justify-between items-center"><span class="opacity-70">Lãi HH:</span> <b class="text-teal-700" id="sd_amount">...</b></div>
+                    <div class="flex justify-between items-center"><span class="opacity-70">% Tỷ lệ HH:</span> <b class="text-teal-700" id="sd_rate">...</b></div>
+                    <div class="flex justify-between items-center"><span class="opacity-70">Lượt bán:</span> <b class="text-teal-700" id="sd_sold">...</b></div>
+                    <div class="flex justify-between items-center"><span class="opacity-70">Rate SP:</span> <b class="text-teal-700" id="sd_prating">...</b></div>
+                    <div class="flex justify-between items-center"><span class="opacity-70">Rate Shop:</span> <b class="text-teal-700" id="sd_srating">...</b></div>
+                    <div class="flex justify-between items-center"><span class="opacity-70">Tồn kho:</span> <b class="text-teal-700" id="sd_stock">...</b></div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col flex-1" style="display: flex; flex-direction: column; flex: 1;">
+                  <label class="font-bold uppercase tracking-widest flex items-center gap-1"
+                    style="font-size: 0.65rem; color: #64748b; margin-bottom: 0.5rem;">
+                    Tóm Tắt Khách Quan (Logs)
+                  </label>
+                  <textarea id="pModal_ai_note" class="w-full rounded-lg p-4 outline-none resize-none shadow-sm border"
+                    style="background-color: #f8fafc; border: 1px solid #e2e8f0; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.8rem; color: #475569; line-height: 1.6; flex: 1; width: 100%; border-radius: 0.5rem; box-sizing: border-box; min-height: 120px;"
+                    readonly></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="px-6 py-3 flex justify-end border-t"
+          style="flex-shrink: 0; background-color: #ffffff; border-top: 1px solid #f1f5f9; display: flex; justify-content: flex-end; align-items: center;">
+          <button type="button" onclick="closeProductModal()"
+            class="px-6 py-2 rounded-lg font-medium transition shadow-sm"
+            style="background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; cursor: pointer; font-size: 0.85rem; font-weight: 600;">Đóng
+            Lại</button>
+        </div>
+      </div>
+    </div>
+    <!-- DUAL-PERSONA GLOBAL MODALS -->
+    <!-- Model Form Modal (Tailwind CSS) -->
+    <div id="modal-model-form"
+      class="fixed inset-0 z-[1050] hidden items-center justify-center bg-black/60 backdrop-blur-sm"
+      onclick="if(event.target === this) { this.classList.add('hidden'); this.classList.remove('flex'); }">
+      <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative">
+        <div class="flex justify-between items-center mb-6">
+          <h5 class="text-xl font-bold text-white mb-0">Hồ Sơ Người Mẫu</h5>
+          <button type="button" class="text-gray-400 hover:text-white"
+            onclick="document.getElementById('modal-model-form').classList.add('hidden'); document.getElementById('modal-model-form').classList.remove('flex');">
+            <i data-feather="x"></i>
+          </button>
+        </div>
+
+        <input type="hidden" id="mod_id_hidden">
+        <div class="mb-4">
+          <label class="form-label text-sm text-gray-400">Tên Mẫu</label>
+          <input type="text" id="mod_name" class="form-control" placeholder="Tên VD: Anna">
+        </div>
+        <div class="mb-4">
+          <label class="form-label text-sm text-gray-400">Giới tính</label>
+          <select id="mod_gender" class="form-select bg-gray-800 text-white border-gray-700">
+            <option value="female">Nữ</option>
+            <option value="male">Nam</option>
+            <option value="intersex">Phi Giới Tính</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class="form-label text-sm text-gray-400">Tuổi ước tính</label>
+          <input type="number" id="mod_age" class="form-control" placeholder="Độ tuổi">
+        </div>
+        <div class="mb-4">
+          <label class="form-label text-sm text-gray-400">Phân Loại Phong Cách</label>
+          <input type="text" id="mod_style" class="form-control" placeholder="asian, elegant, street...">
+        </div>
+        <div class="flex items-center gap-3 mb-6 mt-4">
+          <div class="form-check form-switch cursor-pointer">
+            <input class="form-check-input cursor-pointer" type="checkbox" id="mod_active" checked>
+            <label class="form-check-label cursor-pointer text-white" for="mod_active">Sẵn sàng kích hoạt
+              (Active)</label>
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-3 mt-4 border-t border-gray-700 pt-4">
+          <button type="button" class="btn btn-secondary"
+            onclick="document.getElementById('modal-model-form').classList.add('hidden'); document.getElementById('modal-model-form').classList.remove('flex');">Đóng</button>
+          <button type="button" class="btn btn-primary" id="btnSaveModel" onclick="saveModelAction()">Lưu Xuống
+            CSDL</button>
+        </div>
+      </div>
+    </div>
+    <footer class="pc-footer hidden">
+    </footer>
+
+    <!-- Required Js -->
+    <script src="js/plugins/simplebar.min.js"></script>
+    <script src="js/plugins/popper.min.js"></script>
+    <script src="js/icon/custom-icon.js"></script>
+    <script src="js/plugins/feather.min.js"></script>
+    <script src="js/component.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/script.js"></script>
+
+    <div class="floting-button fixed bottom-[50px] right-[30px] z-[1030]">
+    </div>
+
+
+    <script>
+      layout_change('light');
+    </script>
+
+
+    <script>
+      change_box_container('false');
+    </script>
+
+    <script>
+      layout_caption_change('true');
+    </script>
+
+    <script>
+      layout_rtl_change('false');
+    </script>
+
+    <script>
+      preset_change('preset-1');
+    </script>
+
+    <script>
+      main_layout_change('vertical');
+    </script>
+
+
+
+    <!-- DataTables & jQuery & Custom Modules -->
+    <link rel="stylesheet" href="css/datatables.min.css">
+    <script src="js/jquery-4.0.0.min.js"></script>
+    <script src="js/datatables.min.js"></script>
+
+    <script src="js/auth.js?v=4"></script>
+    <script src="js/ui.js?v=4"></script>
+    <script src="js/tab_scripts.js?v=4"></script>
+    <script src="js/tab_scoring.js?v=4"></script>
+    <script src="js/tab_music.js?v=4"></script>
+    <script src="js/tab_models.js?v=4"></script>
+    <script src="js/tab_config.js?v=4"></script>
+    <script src="js/tab_products.js?v=4"></script>
+</body>
+<!-- [Body] end -->
+
+</html>

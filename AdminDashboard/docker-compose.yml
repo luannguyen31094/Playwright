@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # 1. Web Server Nginx host Giao Diện
+  dashboard-ui:
+    build: .
+    container_name: tl-dashboard-ui
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+  # 2. Ngrok Tunnel Phóng Giao diện lên Internet
+  ngrok-dashboard:
+    image: ngrok/ngrok:latest
+    container_name: tl-dashboard-ngrok
+    environment:
+      - NGROK_AUTHTOKEN=2wGl6l5yPeFeLF5DMHY2qXFBv2Y_A6Nxgv5upTZSaQjnzYfp
+    command: "http --domain=evidently-charmed-pegasus.ngrok-free.app dashboard-ui:80"
+    depends_on:
+      - dashboard-ui
+    restart: unless-stopped
+
+  # 🔥 CỨU CÁNH: CLOUDFLARE TUNNEL (Miễn phí 100%, Không cần tài khoản, Không giới hạn)
+  # Sếp thích xài cái này thì Bôi đen mở Comment (Và Comment thằng Ngrok lại)
+  # cloudflared:
+  #   image: cloudflare/cloudflared:latest
+  #   container_name: tl-dashboard-cf
+  #   command: tunnel --url http://dashboard-ui:80
+  #   depends_on:
+  #     - dashboard-ui
+  #   restart: unless-stopped

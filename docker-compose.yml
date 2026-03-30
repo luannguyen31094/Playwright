@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # 1. API Gateway & Automation
+  backend:
+    image: tlshop/n8n-bridge-backend:latest
+    container_name: n8n-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env # Yêu cầu có file .env ở thư mục gốc giống .env.example
+    volumes:
+      - ./AdminScraperProfiles:/app/AdminScraperProfiles # Mount thư mục profile ra ngoài để không mất khi restart container
+    restart: unless-stopped
+
+  # 2. Giao diện Website Admin Dashboard
+  dashboard-ui:
+    image: tlshop/n8n-bridge-ui:latest
+    container_name: tl-dashboard-ui
+    ports:
+      - "8080:80"
+    restart: unless-stopped

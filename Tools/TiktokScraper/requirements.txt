@@ -1,0 +1,4 @@
+playwright
+jmespath
+psycopg2
+2captcha-python

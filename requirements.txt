@@ -1,0 +1,9 @@
+flask==3.0.0
+flask_cors==4.0.0
+pyngrok==7.0.0
+undetected_chromedriver==3.5.3
+selenium_stealth==1.0.6
+selenium==4.15.2
+psycopg2-binary==2.9.9
+requests==2.31.0
+python-dotenv==1.0.0

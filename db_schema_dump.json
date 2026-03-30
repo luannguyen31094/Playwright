@@ -1,0 +1,1702 @@
+{
+  "aff_categories": {
+    "comment": "Quản lý cây danh mục sản phẩm để phân loại luồng quét",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "name",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "parent_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "level",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "tiktok_category_id",
+        "type": "character varying(50)",
+        "comment": "Mã thể loại lấy từ cuối URL TikTok (ví dụ: 824328)"
+      },
+      {
+        "name": "slug",
+        "type": "character varying",
+        "comment": null
+      },
+      {
+        "name": "url",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "name_vi",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "aff_model_assets": {
+    "comment": "Kho lưu trữ hình ảnh vật lý của người mẫu theo đường dẫn tương đối.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "model_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "file_name",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "folder_name",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "base_path",
+        "type": "text",
+        "comment": "Gốc thư mục chứa ảnh. Thay đổi ở đây sẽ cập nhật toàn bộ hệ thống."
+      },
+      {
+        "name": "usage_count",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "aspect_ratio",
+        "type": "character varying(20)",
+        "comment": "Tỉ lệ khung hình của ảnh (Ví dụ: 19:6, 16:9, 9:16)."
+      },
+      {
+        "name": "gsheet_id",
+        "type": "text",
+        "comment": "ID định danh trên Google Sheet để quản lý thủ công."
+      },
+      {
+        "name": "gsheet_link",
+        "type": "text",
+        "comment": "Link xem nhanh ảnh người mẫu trên Google Drive."
+      }
+    ]
+  },
+  "aff_models": {
+    "comment": "Quản lý thông tin định danh và đặc điểm nhân dạng của người mẫu.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "name",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "gender",
+        "type": "character varying(20)",
+        "comment": "Giới tính người mẫu, dùng để khớp dữ liệu với bảng phân tích sản phẩm."
+      },
+      {
+        "name": "age_range",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "style_tag",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "comment": null
+      }
+    ]
+  },
+  "aff_music_catalogue": {
+    "comment": "Bảng danh mục phân loại vibe nhạc (Remix, Chill, Suspense...) cho dự án video.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": "ID tự tăng, định danh duy nhất cho loại nhạc."
+      },
+      {
+        "name": "vibe_name",
+        "type": "character varying(50)",
+        "comment": "Tên hiển thị của cảm xúc nhạc (Ví dụ: Remix Sôi Động)."
+      },
+      {
+        "name": "folder_name",
+        "type": "character varying(100)",
+        "comment": "Tên thư mục vật lý trên ổ đĩa (Ví dụ: Remix)."
+      },
+      {
+        "name": "base_path",
+        "type": "text",
+        "comment": null
+      }
+    ]
+  },
+  "aff_music_library": {
+    "comment": "Kho lưu trữ chi tiết các tập tin nhạc và thông số sử dụng.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": "ID tự tăng của bài nhạc."
+      },
+      {
+        "name": "catalogue_id",
+        "type": "integer",
+        "comment": "Khóa ngoại liên kết tới danh mục vibe nhạc tương ứng."
+      },
+      {
+        "name": "file_name",
+        "type": "character varying(255)",
+        "comment": "Tên file vật lý (Ví dụ: 7.mp3)."
+      },
+      {
+        "name": "usage_count",
+        "type": "integer",
+        "comment": "Số lần bài nhạc đã được chọn để render video, dùng để luân chuyển nhạc tránh bị lặp."
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "comment": "Trạng thái bài nhạc (True: Sẵn sàng dùng, False: Đang bảo trì hoặc lỗi)."
+      },
+      {
+        "name": "gsheet_id",
+        "type": "text",
+        "comment": "ID của hàng tương ứng trên Google Sheet để đồng bộ."
+      },
+      {
+        "name": "gsheet_link",
+        "type": "text",
+        "comment": "Đường dẫn trực tiếp đến file nhạc hoặc thư mục lưu trữ trên Google Drive/Sheet."
+      }
+    ]
+  },
+  "aff_product_analysis": {
+    "comment": "Bảng trung tâm lưu trữ, phân tích tiềm năng và quản lý quy trình (Workflow) sản phẩm TikTok Affiliate của TL Shop",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "tiktok_product_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "sale_price",
+        "type": "numeric(15,2)",
+        "comment": "Giá bán hiện tại sau khi giảm"
+      },
+      {
+        "name": "origin_price",
+        "type": "numeric(15,2)",
+        "comment": "Giá gốc chưa giảm để AI tính độ hời"
+      },
+      {
+        "name": "discount_percent",
+        "type": "numeric(5,2)",
+        "comment": "% Giảm giá để làm kịch bản Flash Sale"
+      },
+      {
+        "name": "commission_rate",
+        "type": "numeric(5,2)",
+        "comment": null
+      },
+      {
+        "name": "commission_amount",
+        "type": "numeric(15,2)",
+        "comment": "Số tiền hoa hồng thực nhận (ví dụ 4.410đ)"
+      },
+      {
+        "name": "total_sold",
+        "type": "integer",
+        "comment": "Tổng số lượng đã bán ngoài thị trường"
+      },
+      {
+        "name": "review_count",
+        "type": "integer",
+        "comment": "Số lượt khách hàng đã đánh giá sản phẩm"
+      },
+      {
+        "name": "product_rating",
+        "type": "numeric(3,2)",
+        "comment": "Điểm sao trung bình của sản phẩm (4.2-5.0)"
+      },
+      {
+        "name": "shop_rating",
+        "type": "numeric(3,2)",
+        "comment": "Độ uy tín của Shop (lọc shop tránh bị hoàn hàng)"
+      },
+      {
+        "name": "stock_level",
+        "type": "integer",
+        "comment": "Số lượng tồn kho để tránh làm video cho hàng sắp hết"
+      },
+      {
+        "name": "ai_score",
+        "type": "integer",
+        "comment": "Điểm tổng quát: Điểm trung bình do AI chấm dựa trên tất cả các tiêu chí."
+      },
+      {
+        "name": "ai_analysis_note",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(20)",
+        "comment": "Trạng thái: discovered, ai_approved, in_showcase, video_created, rejected"
+      },
+      {
+        "name": "is_deleted",
+        "type": "boolean",
+        "comment": null
+      },
+      {
+        "name": "is_affiliate",
+        "type": "boolean",
+        "comment": null
+      },
+      {
+        "name": "captured_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "trust_score",
+        "type": "integer",
+        "comment": "Điểm tin cậy (0-10): AI đánh giá mức độ trung thực giữa hình ảnh và mô tả sản phẩm."
+      },
+      {
+        "name": "pain_point",
+        "type": "text",
+        "comment": "Nỗi đau khách hàng: Vấn đề chính mà sản phẩm giải quyết (ví dụ: hôi chân, nóng bức)."
+      },
+      {
+        "name": "suggested_hook",
+        "type": "text",
+        "comment": "Câu mở đầu video: Câu dẫn thu hút (3 giây đầu) do AI gợi ý để làm video marketing."
+      },
+      {
+        "name": "visual_score",
+        "type": "integer",
+        "comment": "Điểm thẩm mỹ (0-100): Đánh giá chất lượng hình ảnh, độ sang trọng và bắt mắt của sản phẩm."
+      },
+      {
+        "name": "is_video_ready",
+        "type": "boolean",
+        "comment": "Trạng thái video: Đánh dấu sản phẩm đã đủ điều kiện chất lượng để tiến hành sản xuất video."
+      },
+      {
+        "name": "gender",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "product_type_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "crop_coords",
+        "type": "character varying(255)",
+        "comment": "Tọa độ vùng chứa sản phẩm [x1, y1, x2, y2] để Python tự động cắt ảnh."
+      },
+      {
+        "name": "music_vibe",
+        "type": "text",
+        "comment": "Vibe nhạc (Pop-chill, Lo-fi, Upbeat...) để Python bốc file MP3 phù hợp."
+      }
+    ]
+  },
+  "aff_product_commissions": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "product_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "rate_percent",
+        "type": "numeric(5,2)",
+        "comment": null
+      },
+      {
+        "name": "amount",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "source",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "aff_product_types": {
+    "comment": "Bảng định nghĩa các loại sản phẩm và mã template video tương ứng.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": "ID định danh loại sản phẩm (Khóa chính)."
+      },
+      {
+        "name": "name_vi",
+        "type": "character varying(100)",
+        "comment": "Tên loại sản phẩm bằng tiếng Việt (Ví dụ: Áo, Quần, Giày, Túi Xách, Bộ...)."
+      },
+      {
+        "name": "template_code",
+        "type": "character varying(50)",
+        "comment": "Mã định danh template (Key_id). Script Python sẽ nhìn vào đây để chọn hiệu ứng chuyển cảnh và font chữ phù hợp."
+      }
+    ]
+  },
+  "aff_products": {
+    "comment": "Thông tin định danh sản phẩm thời trang",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "tiktok_product_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "shop_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "category_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "brand_name",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "image_urls",
+        "type": "jsonb",
+        "comment": null
+      },
+      {
+        "name": "canonical_url",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "aff_shops": {
+    "comment": "Thông tin các shop ruột được lấy từ seller_info trong JSON",
+    "columns": [
+      {
+        "name": "id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "name",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "logo_url",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "rating_score",
+        "type": "numeric(3,2)",
+        "comment": null
+      },
+      {
+        "name": "follower_count",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "aff_showcase_items": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "showcase_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "product_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "product_name",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "price",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "stock",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "position_in_showcase",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "is_live",
+        "type": "boolean",
+        "comment": null
+      },
+      {
+        "name": "added_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "last_synced_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "aff_showcases": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "showcase_name",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "theme_color",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "video_output_path",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "account_id",
+        "type": "integer",
+        "comment": null
+      }
+    ]
+  },
+  "aff_vid_campaigns": {
+    "comment": "Điều phối quy trình tạo video từ sản phẩm win",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "product_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "video_status",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "ai_prompt",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "video_url",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "uploaded_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "showcase_item_id",
+        "type": "character varying(100)",
+        "comment": "Mã định danh sản phẩm sau khi Python thực hiện add vào Showcase TikTok."
+      },
+      {
+        "name": "gender",
+        "type": "character varying(20)",
+        "comment": "Giới tính mục tiêu của video (Male/Female/Unisex)."
+      },
+      {
+        "name": "product_type_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "music_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "media_product_id",
+        "type": "text",
+        "comment": "Mã media ID phục vụ cho script Python tương tác với hệ thống TikTok."
+      },
+      {
+        "name": "media_product_url",
+        "type": "text",
+        "comment": "Đường dẫn media phục vụ việc tải tài nguyên làm video."
+      },
+      {
+        "name": "media_modal_id",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "local_dir",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "folder_driver_id",
+        "type": "character varying",
+        "comment": null
+      },
+      {
+        "name": "edit_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "tiktok_id",
+        "type": "character varying(100)",
+        "comment": null
+      }
+    ]
+  },
+  "aff_video_templates": {
+    "comment": "Bảng lưu trữ đa dạng kịch bản góc quay sinh video tự động (nhiều góc) phục vụ n8n. Phân tầng theo Category, Gender và Style.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": "Khóa chính, tự nhảy số"
+      },
+      {
+        "name": "template_name",
+        "type": "character varying(255)",
+        "comment": "Tên gợi nhớ kịch bản (VD: Kịch bản Áo Nam đi bộ, Review Túi xách, Đồ ăn vặt...)"
+      },
+      {
+        "name": "category",
+        "type": "character varying(100)",
+        "comment": "Lưu text phân loại gốc gợi nhớ (VD: Thời trang nam, Điện tử, Mỹ phẩm)"
+      },
+      {
+        "name": "gender",
+        "type": "character varying(50)",
+        "comment": "Lưu giới tính áp dụng (Nam, Nữ, Unisex, All)"
+      },
+      {
+        "name": "product_type_id",
+        "type": "integer",
+        "comment": "KHÓA LIÊN KẾT siêu bám vào bảng aff_product_types (ID tương ứng của Loại sản phẩm: Áo, Quần, Giày... Lõi lấy Data của n8n)"
+      },
+      {
+        "name": "style_slug",
+        "type": "character varying(100)",
+        "comment": "Phân loại Style chuyên sâu trong cùng nhánh SP (lip_sync_nhac, walking_di_bo, detail_macro...)"
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "comment": "Trạng thái Bật/Tắt (True=Dùng, False=Ngưng) để ẩn kịch bản cũ mà không cần xóa Data"
+      },
+      {
+        "name": "is_default",
+        "type": "boolean",
+        "comment": "Đánh dấu đây là Kịch bản gốc vạn năng dùng dự phòng (Fallback) khi 1 sản phẩm chưa có kịch bản chuyên sâu nào khớp lệnh"
+      },
+      {
+        "name": "shots_json",
+        "type": "jsonb",
+        "comment": "ARRAY JSONB CHỨA KỊCH BẢN GỐC - Đóng gói mảng 5/12/N góc quay (VD: [{id: S1, act: Quay ngan...}]). N8N Node móc Data từ đây!"
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "ai_policy_rules": {
+    "comment": "Bảng tự động hóa luật AI (Mỗi nền tảng 1 dòng duy nhất để N8N dễ quét và ghi đè)",
+    "columns": [
+      {
+        "name": "platform",
+        "type": "character varying(50)",
+        "comment": "tiktok, shopee, facebook,..."
+      },
+      {
+        "name": "policy_links",
+        "type": "text",
+        "comment": "Các link chứa luật lệ của nền tảng để N8N/AI cào định kỳ"
+      },
+      {
+        "name": "reference_prompt",
+        "type": "text",
+        "comment": "Cấu trúc lệnh Prompt bắt buộc khi kêu AI đi tóm tắt luật"
+      },
+      {
+        "name": "instruction_old",
+        "type": "text",
+        "comment": "Kho lưu trữ luật cũ (Bản backup)"
+      },
+      {
+        "name": "instruction_new",
+        "type": "text",
+        "comment": "Luật Vừa Mới Cào về xong (Dành cho việc duyệt lại)"
+      },
+      {
+        "name": "instruction_active",
+        "type": "text",
+        "comment": "Luật Hiện Hành Đang Chạy Thực Tế (Code Python lấy cột này bọc vào Prompt)"
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "comment": null
+      },
+      {
+        "name": "last_updated",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "ai_video_policy_logs": {
+    "comment": "Lưu lịch sử phán xét của AI Policy trên từng File Video.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "video_filename",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "project_source",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "reference_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "ai_verdict",
+        "type": "character varying(50)",
+        "comment": "CLEAN (Sạch) / VIOLATION (Vi Phạm)"
+      },
+      {
+        "name": "ai_explanation",
+        "type": "text",
+        "comment": "Chi tiết lỗi soi ra từ từng Khung hình Video"
+      },
+      {
+        "name": "human_override",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "api_payload_templates": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "endpoint_name",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "payload_schema",
+        "type": "jsonb",
+        "comment": null
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "comment": null
+      }
+    ]
+  },
+  "captcha_logs": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "module_name",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "worker_id",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "target_type",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "target_id",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "captcha_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "captcha_type",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "recognition_time",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "cost",
+        "type": "numeric(10,5)",
+        "comment": null
+      },
+      {
+        "name": "result_raw",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "page_url",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "ip_address",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "channel_tokens": {
+    "comment": "Bảng lưu trữ Token và thông tin App của các kênh mạng xã hội",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "channel_name",
+        "type": "character varying(100)",
+        "comment": "Tên hiển thị của kênh (Ví dụ: Luxury_Home_01)"
+      },
+      {
+        "name": "platform",
+        "type": "character varying(50)",
+        "comment": "Nền tảng mạng xã hội (tiktok, youtube,...)"
+      },
+      {
+        "name": "client_key",
+        "type": "character varying(255)",
+        "comment": "Mã định danh App của nền tảng"
+      },
+      {
+        "name": "client_secret",
+        "type": "character varying(255)",
+        "comment": "Mã bảo mật App (Client Secret)"
+      },
+      {
+        "name": "redirect_uri",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "account_id",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "access_token",
+        "type": "text",
+        "comment": "Mã truy cập tạm thời (hết hạn nhanh)"
+      },
+      {
+        "name": "refresh_token",
+        "type": "text",
+        "comment": "Mã dùng để làm mới access_token (hạn dài)"
+      },
+      {
+        "name": "expires_at",
+        "type": "timestamp without time zone",
+        "comment": "Thời điểm chính xác access_token sẽ bị tèo"
+      },
+      {
+        "name": "scope",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "code_verifier",
+        "type": "text",
+        "comment": null
+      }
+    ]
+  },
+  "cleanup_logs": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "log_date",
+        "type": "date",
+        "comment": null
+      },
+      {
+        "name": "deleted_count",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "client_registry": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "worker_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "project_id",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "folder_name",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "account_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "is_busy",
+        "type": "boolean",
+        "comment": null
+      },
+      {
+        "name": "channel_group",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "allowed_ips",
+        "type": "text[]",
+        "comment": null
+      },
+      {
+        "name": "Note",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "retry_count",
+        "type": "integer",
+        "comment": null
+      }
+    ]
+  },
+  "execution_logs": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "execution_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "worker_id",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "task_type",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "payload",
+        "type": "jsonb",
+        "comment": null
+      },
+      {
+        "name": "result",
+        "type": "jsonb",
+        "comment": null
+      },
+      {
+        "name": "error_detail",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "start_time",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "end_time",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "google_accounts": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "email",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "password",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "recovery_email",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "phone_number",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "date",
+        "comment": null
+      },
+      {
+        "name": "expiry_date",
+        "type": "date",
+        "comment": null
+      },
+      {
+        "name": "account_package",
+        "type": "character varying(50)",
+        "comment": null
+      }
+    ]
+  },
+  "n8n_error_logs": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "execution_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "workflow_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "comment": null
+      },
+      {
+        "name": "error_level",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "source",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "stack_trace",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "context_data",
+        "type": "jsonb",
+        "comment": null
+      },
+      {
+        "name": "is_resolved",
+        "type": "boolean",
+        "comment": null
+      }
+    ]
+  },
+  "scoring_criteria": {
+    "comment": "Bảng cấu hình \"Bộ não\" của hệ thống: Chứa các quy tắc chấm điểm để phân hạng sản phẩm Affiliate (S, A, B, C, F).",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": "Khóa chính tự tăng, định danh duy nhất cho từng quy tắc chấm điểm."
+      },
+      {
+        "name": "group_name",
+        "type": "character varying(50)",
+        "comment": "Nhóm tiêu chí (Ví dụ: FINANCE, TRUST, SHOP). Giúp AI phân loại logic khi tính toán hoặc lập báo cáo."
+      },
+      {
+        "name": "item_key",
+        "type": "character varying(50)",
+        "comment": "Tên cột dữ liệu trong bảng aff_product_analysis (Ví dụ: commission_amount). AI phải dùng đúng tên này để JOIN hoặc lọc dữ liệu."
+      },
+      {
+        "name": "min_val",
+        "type": "numeric(15,2)",
+        "comment": "Giá trị ngưỡng dưới (bao gồm cả giá trị này). Nếu dữ liệu sản phẩm >= min_val thì mới xét tiếp mốc điểm."
+      },
+      {
+        "name": "max_val",
+        "type": "numeric(15,2)",
+        "comment": "Giá trị ngưỡng trên (bao gồm cả giá trị này). Dùng để tạo các khoảng điểm (Ví dụ: từ 5.000 đến 10.000)."
+      },
+      {
+        "name": "score",
+        "type": "integer",
+        "comment": "Số điểm cộng hoặc trừ (integer). Tổng số điểm này của một sản phẩm sẽ quyết định Rank cuối cùng."
+      },
+      {
+        "name": "rank_bonus_note",
+        "type": "text",
+        "comment": "Mô tả chi tiết logic của mốc điểm này. Đây là dữ liệu quan trọng để AI giải thích lý do tại sao một sản phẩm đạt Rank S hay F."
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "comment": "Trạng thái kích hoạt (boolean). AI chỉ được phép lấy các quy tắc có giá trị true để tính điểm."
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": "Thời điểm tạo quy tắc, dùng để theo dõi lịch sử cập nhật cấu hình hệ thống."
+      }
+    ]
+  },
+  "sys_captcha_logs": {
+    "comment": "Trung tâm nhật ký giải mã Captcha cho toàn bộ hệ thống Shop Automation",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "module_name",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "worker_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "target_type",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "target_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "captcha_id",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "captcha_type",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(20)",
+        "comment": null
+      },
+      {
+        "name": "recognition_time",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "cost",
+        "type": "numeric(10,6)",
+        "comment": null
+      },
+      {
+        "name": "result_raw",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "page_url",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "ip_address",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "sys_dashboard_history": {
+    "comment": "Bảng MASTER lưu trữ lịch sử mọi Tab trên Dashboard (Scripts, Scoring, Models...) theo dạng JSON động",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "entity_type",
+        "type": "character varying(50)",
+        "comment": "Loại thực thể: scripts, scoring, music, models..."
+      },
+      {
+        "name": "entity_id",
+        "type": "integer",
+        "comment": "Khóa chính của thực thể đó"
+      },
+      {
+        "name": "snapshot_json",
+        "type": "jsonb",
+        "comment": "Toàn bộ dữ liệu cột của dòng đó ở thời điểm lưu"
+      },
+      {
+        "name": "saved_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "saved_by",
+        "type": "character varying(50)",
+        "comment": null
+      }
+    ]
+  },
+  "system_config": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "variable_name",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "variable_value",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "comment": null
+      }
+    ]
+  },
+  "tiktok_accounts": {
+    "comment": "Bảng quản lý tài khoản TikTok phục vụ hệ thống chạy bot và đăng video tự động",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "google_account_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "username",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "nickname",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "password",
+        "type": "character varying(255)",
+        "comment": null
+      },
+      {
+        "name": "proxy_info",
+        "type": "text",
+        "comment": "Thông tin Proxy riêng biệt cho mỗi tài khoản để tránh bị dính IP spam"
+      },
+      {
+        "name": "cookie_data",
+        "type": "text",
+        "comment": "Dữ liệu Session để bot Selenium/ADB có thể truy cập thẳng vào tài khoản"
+      },
+      {
+        "name": "user_agent",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "status",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "follower_count",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "is_affiliate_enabled",
+        "type": "boolean",
+        "comment": null
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "last_login",
+        "type": "timestamp without time zone",
+        "comment": null
+      },
+      {
+        "name": "code_verifier",
+        "type": "character varying",
+        "comment": null
+      },
+      {
+        "name": "category_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "chrome_profile_folder",
+        "type": "character varying(100)",
+        "comment": null
+      },
+      {
+        "name": "phone",
+        "type": "character varying(20)",
+        "comment": "Số điện thoại đăng ký (kèm mã quốc gia nếu có)"
+      },
+      {
+        "name": "email",
+        "type": "character varying(255)",
+        "comment": "Email liên kết phục vụ Login / Nhận OTP"
+      },
+      {
+        "name": "tiktok_id",
+        "type": "character varying(100)",
+        "comment": "Tiktok ID (VD: @nguyenvana_fashion)"
+      },
+      {
+        "name": "login_method",
+        "type": "character varying(20)",
+        "comment": "Hình thức đăng nhập: phone, email, tiktokid"
+      }
+    ]
+  },
+  "veo3_status": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "status_name",
+        "type": "character varying(50)",
+        "comment": null
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "comment": null
+      }
+    ]
+  },
+  "veo3_task_status_logs": {
+    "comment": null,
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "task_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "old_status_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "new_status_id",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "comment",
+        "type": "text",
+        "comment": null
+      },
+      {
+        "name": "changed_at",
+        "type": "timestamp without time zone",
+        "comment": null
+      }
+    ]
+  },
+  "veo3_tasks": {
+    "comment": "Bảng quản lý quy trình tạo video 12 shot bằng AI Veo3",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "comment": "ID định danh nội bộ (Khóa chính)"
+      },
+      {
+        "name": "batch_id",
+        "type": "character varying(50)",
+        "comment": "Mã đợt chạy (Để n8n quản lý luồng 3 đợt x 4 worker)"
+      },
+      {
+        "name": "project_id",
+        "type": "integer",
+        "comment": "ID của dự án phim (Dùng để gom 12 shot lại với nhau)"
+      },
+      {
+        "name": "shot_index",
+        "type": "integer",
+        "comment": "Thứ tự của shot trong video (Từ 1 đến 12)"
+      },
+      {
+        "name": "worker_id",
+        "type": "character varying(10)",
+        "comment": "Định danh robot xử lý (Worker 1, 2, 3, hoặc 4)"
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "comment": "Nội dung câu lệnh gửi cho AI Veo3 để tạo video"
+      },
+      {
+        "name": "ticket_id",
+        "type": "character varying(255)",
+        "comment": "Phiếu hẹn (Task ID) lấy từ Web ngay sau khi nhấn nút Tạo"
+      },
+      {
+        "name": "veo_video_id",
+        "type": "character varying(255)",
+        "comment": "ID định danh duy nhất của video do hệ thống Veo3 trả về"
+      },
+      {
+        "name": "video_url",
+        "type": "text",
+        "comment": "Đường dẫn chính thức để xem hoặc tải video thành phẩm"
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp without time zone",
+        "comment": "Thời điểm khởi tạo task"
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp without time zone",
+        "comment": "Thời điểm cập nhật dữ liệu cuối cùng"
+      },
+      {
+        "name": "comment",
+        "type": "text",
+        "comment": "Ghi chú tình hình thực tế từ Worker hoặc Gateway"
+      },
+      {
+        "name": "retry_count",
+        "type": "integer",
+        "comment": null
+      },
+      {
+        "name": "status_id",
+        "type": "integer",
+        "comment": null
+      }
+    ]
+  }
+}
